@@ -1,7 +1,3 @@
-import { error } from "console";
-
-console.log("hello world!");
-
 function RNG(min: number, max: number): number {
   const rng = Math.random();
   return Math.trunc(rng * (max - min) + min);
@@ -43,7 +39,38 @@ for (const routa of route) {
   estrazioni[routa] = estrazione;
 }
 
-console.dir(JSON.stringify(estrazioni, null, 2));
+function createRuotaCnt(ruotaName: string, estrazioni: number[]) {
+  const routaDiv = document.createElement("div");
+  routaDiv.className = `routa ${ruotaName.toLowerCase()}`;
+
+  const nameH2 = document.createElement("h2");
+  nameH2.innerText = ruotaName;
+  nameH2.className = 'ruota-title';
+  routaDiv.appendChild(nameH2);
+
+  for (const num of estrazioni) {
+    const numP = document.createElement("p");
+    numP.innerText = '' + num;
+    const numDiv = document.createElement('div');
+    numP.className = 'ruota-estrazione';
+    numDiv.appendChild(numP);
+    routaDiv.appendChild(numDiv);
+  }
+  return routaDiv;
+}
+
+const container = document.getElementById("cnt");
+if (container) {
+  const pre = document.createElement("pre");
+  // pre.innerText = JSON.stringify(estrazioni, null, 2);
+  // container.appendChild(pre);
+
+  for (const routa of route) {
+    const routaEstrazioni = estrazioni[routa];
+    const routaDiv = createRuotaCnt(routa, routaEstrazioni);
+    container.appendChild(routaDiv);
+  }
+}
 
 // function RNGDec(min:number, max:number, precision:number):number {
 //     const multFactor = Math.pow(10, precision);
