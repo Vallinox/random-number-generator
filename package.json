@@ -13,5 +13,8 @@
     "generator"
   ],
   "author": "vallinox",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.5.4"
+  }
 }
